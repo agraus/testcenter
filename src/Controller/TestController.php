@@ -10,11 +10,38 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
    /**
-    * @Route("/")
+    * @Route("/", methods={"GET"})
     */
 
    public function home()
     {
-        return new Response('<h1>Testing</h1>');
+        return $this->render('home.html.twig');
+    }
+
+    /**
+     * @Route("/", methods={"POST"})
+     */
+
+    public function homeEdit()
+    {
+
+    }
+
+    /**
+     * @Route("/{id}", methods={"GET"})
+     */
+
+    public function author($id)
+    {
+        return new Response("<h1>$id</h1>");
+    }
+
+    /**
+     * @Route("/{id}", methods={"POST"})
+     */
+
+    public function authorEdit($id)
+    {
+
     }
 }
