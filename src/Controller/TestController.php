@@ -4,6 +4,12 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,19 +34,27 @@ class TestController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
+     * @Route("/add", methods={"GET"})
      */
 
-    public function author($id)
+    public function book()
     {
-        return new Response("<h1>$id</h1>");
+        $form = $this->createFormBuilder()
+            ->add('name', TextType::class)
+            ->add('date', DateTimeType::class)
+            ->add('comment', TextareaType::class)
+            ->add('pages', IntegerType::class)
+            ->add('price', MoneyType::class)
+            ->getForm();
+        return $this->render('form.html.twig', array(
+            'form' => $form->createView()));
     }
 
     /**
-     * @Route("/{id}", methods={"POST"})
+     * @Route("/add", methods={"POST"})
      */
 
-    public function authorEdit($id)
+    public function bookEdit($id)
     {
 
     }
